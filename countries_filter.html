@@ -1,36 +1,91 @@
 <html>
 <head>
-
-    <script>
-
-        var countriesList =["sat",4,[]];
-        function filter(){
-            var x = document.getElementById("searchTxt").value;
-            
-            console.log(x);
-            applyFilter(x);
+<style>
+    .input-container {
+            background: #ffffff;
+            padding: 25px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
-        function applyFilter(searchTxt){
-            //to-do
-            console.log();
+        .input-container label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
         }
 
-    </script>
+        .styled-input {
+            width: 250px;
+            padding: 10px 12px;
+            border: 2px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .styled-input:focus {
+            border-color: #4CAF50;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+        }
+
+        .styled-input::placeholder {
+            color: #aaa;
+        }
+        </style>
 </head>
+
 <body>
-    <input type="text" id="searchTxt" value="TMF"/>
+    <input type="text" id="searchTxt" value="test-info" class="styled-input"/>
     <br>
     <button onclick="filter()">Filter</button>
     <br>
-    <select>
-        <option>India</option>
-        <option>USA</option>
-        <option>Iran</option>
-        <option>UK</option>
-        <option>Pakistan</option>
-        <option>Srilanka</option>
+    <div id="data">
+        <select id="countriesOptions">
+            <option><b>India</b></option>
+            <option><b>USA</b></option>
+            <option><b>Iran</b></option>
+            <option><b>UK</b></option>
+            <option><b>Pakistan</b></option>
+            <option><b>Srilanka</b></option>
+            
+        </select>
         
-    </select>
+    </div>
+    
+    
+
 </body>
+
+<script>
+        var countriesList =["Argentina","Belgium","Canada","Denmark","Egypt","France","Germany","Hungary","India","Japan","Kenya","Laos","Mexico","Netherlands","Oman","Peru","Qatar","Romania","Spain","Turkey","Uganda","Vietnam","Yemen","Zambia","Australia","Brazil","Chile","Dominican Republic","Ethiopia","Finland","Greece","Haiti","Indonesia","Jordan","Kuwait","Lebanon","Morocco","Norway","Pakistan","Russia","Sweden","Thailand","Ukraine","Venezuela","Zimbabwe","Algeria","Bangladesh","Croatia","Ecuador","Philippines"];
+        var filteredOptionsList = [];
+        var testList = document.getElementsByTagName("option");
+        console.log(testList);
+        console.log(countriesList);
+        
+        // for(var i=0;i<testList.length;i++){
+        //     testArr.push(testList[i].innerText);
+        // }
+        
+        console.log(document.getElementById("searchTxt"));// null 
+        function filter(){
+            var x = document.getElementById("searchTxt").value;
+            console.log(x);
+            applyFilter(x);
+        }
+        var filteredEle = document.getElementById("countriesOptions");
+        function applyFilter(searchTxt){
+            for(var i=0;i<countriesList.length;i++){
+                if((countriesList[i].toLowerCase()).startsWith(searchTxt.toLowerCase())){
+                    console.log(countriesList[i]);
+                    filteredOptionsList.push("<option>"+countriesList[i]+"</option>");
+
+                }
+            }
+            filteredEle.innerHTML  =filteredOptionsList.join();
+        }
+
+    </script>
 </html>
